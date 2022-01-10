@@ -1,0 +1,19 @@
+universe   = vanilla
+getenv     = true
+# run script -- make sure that condor has execute permission for this file (chmod a+x script.py)
+executable = /work/jahed.abedi/Boltzmann_echoes_3_MFM_nlive_NoLambda_alpha/GW190521_ringdown_new/run.sh
+# file to dump stdout (this directory should exist)
+output     = /work/jahed.abedi/Boltzmann_echoes_3_MFM_nlive_NoLambda_alpha/GW190521_ringdown_new/logs/echoes_$(Process).out
+# file to dump stderr
+error     = /work/jahed.abedi/Boltzmann_echoes_3_MFM_nlive_NoLambda_alpha/GW190521_ringdown_new/logs/echoes_$(Process).err 
+# condor logs
+log     = /work/jahed.abedi/Boltzmann_echoes_3_MFM_nlive_NoLambda_alpha/GW190521_ringdown_new/logs/echoes_$(Process).log 
+initialdir = /work/jahed.abedi/Boltzmann_echoes_3_MFM_nlive_NoLambda_alpha/GW190521_ringdown_new
+notification = Never
+arguments  = "-processid $(Process)"
+request_memory = 64GB
+request_cpus = 48
+on_exit_remove = (ExitBySignal == False) || ((ExitBySignal == True) && (ExitSignal != 11))
+accounting_group = cbc.imp.echoes
+queue 1
+
